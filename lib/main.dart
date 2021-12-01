@@ -71,14 +71,19 @@ class MyHomePage extends StatelessWidget {
             physics: ScrollPhysics(),
             child: Column(
               children: <Widget>[
-                Row(
+                SizedBox(
+                  height:50,
+                    child:Row(
                   children: [
                     Text(
-                      "Додади термин:",
+                      "Додади термин: ",
                       style: TextStyle(fontSize: 20),
                     ),
+                    SizedBox(
+                        width: 100,
+                        child: TextField())
                   ],
-                ),
+                )),
                 ListView.builder(
                   shrinkWrap: true,
                   itemCount: elements.length,
