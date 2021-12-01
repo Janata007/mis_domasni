@@ -50,7 +50,7 @@ class MyHomePage extends StatelessWidget {
   final List<String> elements;
   final List<String> termini;
 
-   MyHomePage(
+  MyHomePage(
       @required this.title, @required this.elements, @required this.termini);
 
   @override
@@ -67,69 +67,65 @@ class MyHomePage extends StatelessWidget {
           child: Icon(Icons.add),
           onPressed: () {},
         ),
-        body:
-        SingleChildScrollView(
-          physics: ScrollPhysics(),
-          child: Column(
-            children: <Widget>[
-              Row(children: [
-              Text("Додади термин:", style: TextStyle(fontSize: 20),),
-              ],),
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: elements.length,
-                itemBuilder: (context, index) {
-                  return Card(
-                      elevation: 3,
-                      child: Column(
-                        children: [
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.all(10),
-                                  margin: EdgeInsets.all(10),
-                                  child: Text(
-                                    'Предмет',
-                                    style: TextStyle(fontSize: 20),
-                                  ),
-                                ),
-                                Container(
+        body: SingleChildScrollView(
+            physics: ScrollPhysics(),
+            child: Column(
+              children: <Widget>[
+                Row(
+                  children: [
+                    Text(
+                      "Додади термин:",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ],
+                ),
+                ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: elements.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                        elevation: 3,
+                        child: Column(
+                          children: [
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
                                     padding: EdgeInsets.all(10),
                                     margin: EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Theme.of(context).primaryColorLight,
-                                            width: 3)),
                                     child: Text(
-                                      elements[index],
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                          color: Theme.of(context).primaryColorDark),
-                                    )),
-                              ]),
-                          Text(
-                            termini[index],
-                            style: TextStyle(fontSize: 15, color: Colors.grey),
-                          ),
-                        ],
-                      ));
-                },
-              )
-            ],
-          )
-        )
-        );
+                                      'Предмет',
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                  ),
+                                  Container(
+                                      padding: EdgeInsets.all(10),
+                                      margin: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Theme.of(context)
+                                                  .primaryColorLight,
+                                              width: 3)),
+                                      child: Text(
+                                        elements[index],
+                                        style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                            color: Theme.of(context)
+                                                .primaryColorDark),
+                                      )),
+                                ]),
+                            Text(
+                              termini[index],
+                              style:
+                                  TextStyle(fontSize: 15, color: Colors.grey),
+                            ),
+                          ],
+                        ));
+                  },
+                )
+              ],
+            )));
   }
 }
-
-/*
-ListTile(
-                          title: Text(elements[index], style: TextStyle(
-                              fontSize: 20,
-                              color: Theme.of(context).primaryColorLight),),
-                          subtitle: Text(DateTime.now().toString()),
-                        ),
- */
