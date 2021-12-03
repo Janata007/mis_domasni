@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import 'add_termin.dart';
+import 'constants.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -14,44 +17,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.amber,
       ),
-      home: MyHomePage('Испити термини', [
-        'МиС',
-        'БнП',
-        'ТП',
-        'Аипс',
-        'Иб',
-        'Скит',
-        'Днич',
-        'Ввмн',
-        'В',
-        'Мм',
-        'Дм',
-        'Сп'
-      ], [
-        DateTime(2021, 1, 22, 13).toString(),
-        DateTime(2021, 1, 21, 14).toString(),
-        DateTime(2021, 1, 20, 13).toString(),
-        DateTime(2021, 1, 22, 18).toString(),
-        DateTime(2021, 1, 22, 08).toString(),
-        DateTime(2021, 1, 20, 3).toString(),
-        DateTime(2021, 1, 21, 16).toString(),
-        DateTime(2021, 1, 23, 11).toString(),
-        DateTime(2021, 1, 21, 09).toString(),
-        DateTime(2021, 1, 20, 3).toString(),
-        DateTime(2021, 1, 23, 15).toString(),
-        DateTime(2021, 1, 23, 18).toString()
-      ]),
+      home: MyHomePage('Испити термини', predmetiList,dateList),
     );
   }
 }
-
 class MyHomePage extends StatelessWidget {
   final String title;
   final List<String> elements;
   final List<String> termini;
-
   MyHomePage(
       @required this.title, @required this.elements, @required this.termini);
+
 
   @override
   Widget build(BuildContext context) {
@@ -68,22 +44,10 @@ class MyHomePage extends StatelessWidget {
           onPressed: () {},
         ),
         body: SingleChildScrollView(
-            physics: ScrollPhysics(),
+            physics: const ScrollPhysics(),
             child: Column(
               children: <Widget>[
-                SizedBox(
-                  height:50,
-                    child:Row(
-                  children: [
-                    Text(
-                      "Додади термин: ",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                    SizedBox(
-                        width: 100,
-                        child: TextField())
-                  ],
-                )),
+                  const terminAdd(),
                 ListView.builder(
                   shrinkWrap: true,
                   itemCount: elements.length,
