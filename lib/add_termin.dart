@@ -22,7 +22,11 @@ class _terminAddState extends State<terminAdd> {
         predmetText = predmetController.text;
         terminText = terminController.text;
         predmetiList.add(predmetText);
-        dateList.add(terminText);
+        //formatting the date
+        List<String> data = terminController.text.split('/');
+        String correctDate = DateTime(int.parse(data.elementAt(0)),int.parse(data.elementAt(1)),
+            int.parse(data.elementAt(2)), int.parse(data.elementAt(3))).toString();
+        dateList.add(correctDate);
       });
     }
 
