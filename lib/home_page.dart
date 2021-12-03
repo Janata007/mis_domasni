@@ -6,28 +6,24 @@ import 'add_termin.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
-  final List<String> elements;
-  final List<String> termini;
+  late final List<String> elements;
+  late final List<String> termini;
 
   HomePage(
       @required this.title, @required this.elements, @required this.termini);
   @override
-  _HomePageState createState() => _HomePageState(title, elements, termini);
+  _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  _HomePageState(this.title, this.elements, this.termini);
-  final String title;
-  late final List<String> elements;
-  late final List<String> termini;
   void initState() {
     super.initState();
   }
 
   void _reset(){
     setState((){
-      elements = predmetiList;
-      termini = dateList;
+      widget.elements = predmetiList;
+      widget.termini = dateList;
     });
   }
 
@@ -35,7 +31,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(title),
+          title: Text(widget.title),
           actions: [
             Text("Додади термин"),
             IconButton(onPressed: (){}, icon: Icon(Icons.add))
@@ -52,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                 const terminAdd(),
                 ListView.builder(
                   shrinkWrap: true,
-                  itemCount: elements.length,
+                  itemCount: widget.elements.length,
                   itemBuilder: (context, index) {
                     return Card(
                         elevation: 3,
@@ -79,7 +75,7 @@ class _HomePageState extends State<HomePage> {
                                                   .primaryColorLight,
                                               width: 3)),
                                       child: Text(
-                                        elements[index],
+                                        widget.elements[index],
                                         style: TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold,
@@ -88,7 +84,7 @@ class _HomePageState extends State<HomePage> {
                                       )),
                                 ]),
                             Text(
-                              termini[index],
+                              widget.termini[index],
                               style:
                               TextStyle(fontSize: 15, color: Colors.grey),
                             ),
