@@ -36,7 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   intl: ^0.17.0
   datetime_picker_formfield: ^2.0.0
-
+  syncfusion_flutter_calendar: ^18.4.46
 dev_dependencies:
   flutter_test:
     sdk: flutter

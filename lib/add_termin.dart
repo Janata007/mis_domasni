@@ -27,6 +27,8 @@ class _terminAddState extends State<terminAdd> {
         String correctDate = DateTime(int.parse(data.elementAt(0)),int.parse(data.elementAt(1)),
             int.parse(data.elementAt(2)), int.parse(data.elementAt(3))).toString();
         dateList.add(correctDate);
+        trueDateList.add(DateTime(int.parse(data.elementAt(0)),int.parse(data.elementAt(1)),
+            int.parse(data.elementAt(2)), int.parse(data.elementAt(3))));
       });
     }
 

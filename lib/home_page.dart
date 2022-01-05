@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:lab3/calendar_page.dart';
 import 'package:lab3/constants.dart';
 
 import 'add_termin.dart';
@@ -33,8 +34,13 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           title: Text(widget.title),
           actions: [
-            Text("Додади термин"),
-            IconButton(onPressed: (){}, icon: Icon(Icons.add))
+            Text("Види календар"),
+            IconButton(onPressed: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CalendarPage(widget.termini)),
+              );
+            }, icon: Icon(Icons.apps_sharp))
           ],
         ),
         floatingActionButton: FloatingActionButton(

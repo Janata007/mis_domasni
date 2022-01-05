@@ -1,8 +1,14 @@
 var dateList =  [
-  DateTime(2021, 1, 22, 13).toString(),
-  DateTime(2021, 1, 21, 14).toString(),
-  DateTime(2021, 1, 20, 13).toString(),
-  DateTime(2021, 1, 22, 18).toString(),
+  DateTime(2022, 1, 22, 13).toString(),
+  DateTime(2022, 1, 21, 14).toString(),
+  DateTime(2022, 1, 20, 13).toString(),
+  DateTime(2022, 1, 22, 18).toString(),
+];
+var trueDateList = [
+  DateTime(2022, 1, 22, 13),
+  DateTime(2022, 1, 21, 14),
+  DateTime(2022, 1, 20, 13),
+  DateTime(2022, 1, 22, 18),
 ];
 var predmetiList = [
   'МиС',
