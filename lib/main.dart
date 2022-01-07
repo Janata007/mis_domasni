@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lab3/login_page.dart';
 
 import 'add_termin.dart';
 import 'constants.dart';
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.amber,
       ),
-      home: HomePage('Испити термини', predmetiList,dateList),
+      home: LoginScreen(),
     );
   }
 }

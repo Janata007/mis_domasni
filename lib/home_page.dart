@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lab3/calendar_page.dart';
 import 'package:lab3/constants.dart';
+import 'package:lab3/login_page.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'add_termin.dart';
 
@@ -30,6 +32,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    SharedPreferences prefs;
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
@@ -44,8 +47,13 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: _reset,
+          child: Icon(Icons.arrow_back_rounded),
+          onPressed: () async =>{
+                prefs = await SharedPreferences.getInstance(),
+                prefs.remove('email'),
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (BuildContext ctx) => LoginScreen())),
+              }
         ),
         body: SingleChildScrollView(
             physics: const ScrollPhysics(),
