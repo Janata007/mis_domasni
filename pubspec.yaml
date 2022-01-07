@@ -38,6 +38,9 @@ dependencies:
   datetime_picker_formfield: ^2.0.0
   syncfusion_flutter_calendar: ^18.4.46
   shared_preferences: ^2.0.11
+  flutter_local_notifications: ^4.0.0+1
+  timezone: ^0.6.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

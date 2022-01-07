@@ -6,11 +6,13 @@ import 'package:lab3/login_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'add_termin.dart';
+import 'notification_api.dart';
 
 class HomePage extends StatefulWidget {
   final String title;
   late final List<String> elements;
   late final List<String> termini;
+
 
   HomePage(
       @required this.title, @required this.elements, @required this.termini);
@@ -19,12 +21,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   void initState() {
     super.initState();
   }
 
-  void _reset(){
-    setState((){
+  void _reset() {
+    setState(() {
       widget.elements = predmetiList;
       widget.termini = dateList;
     });
@@ -38,22 +41,30 @@ class _HomePageState extends State<HomePage> {
           title: Text(widget.title),
           actions: [
             Text("Види календар"),
-            IconButton(onPressed: (){
+            IconButton(onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => CalendarPage(widget.termini)),
+                MaterialPageRoute(
+                    builder: (context) => CalendarPage(widget.termini)),
               );
             }, icon: Icon(Icons.apps_sharp))
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.arrow_back_rounded),
-          onPressed: () async =>{
-                prefs = await SharedPreferences.getInstance(),
-                prefs.remove('email'),
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (BuildContext ctx) => LoginScreen())),
-              }
+            child: Icon(Icons.arrow_back_rounded),
+            onPressed: () async =>
+            {
+              NotificationApi.showNotification(
+                title: 'User',
+                body: 'Logging out',
+                payload: 'notification'
+              ),
+              prefs = await SharedPreferences.getInstance(),
+              prefs.remove('email'),
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(
+                      builder: (BuildContext ctx) => LoginScreen())),
+            }
         ),
         body: SingleChildScrollView(
             physics: const ScrollPhysics(),
@@ -85,7 +96,8 @@ class _HomePageState extends State<HomePage> {
                                       margin: EdgeInsets.all(10),
                                       decoration: BoxDecoration(
                                           border: Border.all(
-                                              color: Theme.of(context)
+                                              color: Theme
+                                                  .of(context)
                                                   .primaryColorLight,
                                               width: 3)),
                                       child: Text(
@@ -93,7 +105,8 @@ class _HomePageState extends State<HomePage> {
                                         style: TextStyle(
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold,
-                                            color: Theme.of(context)
+                                            color: Theme
+                                                .of(context)
                                                 .primaryColorDark),
                                       )),
                                 ]),
@@ -108,5 +121,26 @@ class _HomePageState extends State<HomePage> {
                 )
               ],
             )));
+  }
+
+  Future<dynamic> _onDidReceiveLocalNotification(int id,
+      String? title,
+      String? body,
+      String? payload) async {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) =>
+            AlertDialog(
+                title: Text(title ?? ''),
+                content: Text(body ?? ''),
+                actions: [
+                  TextButton(
+                      child: Text("Ok"),
+                      onPressed: () async {
+                      }
+                  )
+                ]
+            )
+    );
   }
 }

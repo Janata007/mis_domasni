@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:lab3/login_page.dart';
 
 import 'add_termin.dart';
 import 'constants.dart';
 import 'home_page.dart';
-
-void main() {
+Future<void> main() async {
+  //WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
