@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lab3/register_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import '../constants.dart';
 import 'home_page.dart';
 
@@ -64,30 +65,38 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Center(
           child: Form(
               child: ListView(
-                shrinkWrap: true,
-                padding: const EdgeInsets.only(left: 24.0, right: 24.0),
-                children: <Widget>[
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [Icon(Icons.account_box_rounded)]),
-                  const SizedBox(
-                    height: 48.0,
-                  ),
-                  username,
-                  const SizedBox(height: 8.0),
-                  password,
-                  const SizedBox(height: 24.0),
-                  TextButton( onPressed: submit, child: Text("Log in"),),
-                  Center(child:Text("Don't have an account?", style: TextStyle(fontSize: 15),),),
-                  TextButton(child: Text("Register Here"), onPressed: (){
-                    Navigator.of(context, rootNavigator: true).pop();
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) =>  RegisterScreen()));
-                  })
-
-                ],
-              ))),
+        shrinkWrap: true,
+        padding: const EdgeInsets.only(left: 24.0, right: 24.0),
+        children: <Widget>[
+          Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [Icon(Icons.account_box_rounded)]),
+          const SizedBox(
+            height: 48.0,
+          ),
+          username,
+          const SizedBox(height: 8.0),
+          password,
+          const SizedBox(height: 24.0),
+          TextButton(
+            onPressed: submit,
+            child: Text("Log in"),
+          ),
+          Center(
+            child: Text(
+              "Don't have an account?",
+              style: TextStyle(fontSize: 15),
+            ),
+          ),
+          TextButton(
+              child: Text("Register Here"),
+              onPressed: () {
+                Navigator.of(context, rootNavigator: true).pop();
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => RegisterScreen()));
+              })
+        ],
+      ))),
     );
   }
 
@@ -102,11 +111,11 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> submit() async {
-    _username= _usernameTextController.text;
+    _username = _usernameTextController.text;
     _password = _passwordTextController.text;
-    if(_username=="" || _password== ""){
+    if (_username == "" || _password == "") {
       _loginErrorDialog();
-    }else {
+    } else {
       _checkUsernameAndPassword();
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString(_username, _password);
@@ -114,11 +123,13 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  void redirectToHome(){
+  void redirectToHome() {
     Navigator.of(context, rootNavigator: true).pop();
     Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) =>  HomePage('Испити термини', predmetiList,dateList)));
+        MaterialPageRoute(
+            builder: (context) =>
+                HomePage('Испити термини', predmetiList, dateList)));
   }
 
   Future<void> _loginErrorDialog() async {
@@ -132,13 +143,19 @@ class _LoginScreenState extends State<LoginScreen> {
           content: SingleChildScrollView(
             child: ListBody(
               children: const <Widget>[
-                Text('Wrong username of password. Please try again', style: TextStyle(color: Colors.amber),),
+                Text(
+                  'Wrong username of password. Please try again',
+                  style: TextStyle(color: Colors.amber),
+                ),
               ],
             ),
           ),
           actions: <Widget>[
             TextButton(
-              child: Text('Ok', style: TextStyle(color: Colors.amberAccent),),
+              child: Text(
+                'Ok',
+                style: TextStyle(color: Colors.amberAccent),
+              ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
@@ -148,17 +165,17 @@ class _LoginScreenState extends State<LoginScreen> {
       },
     );
   }
+
   void _checkUsernameAndPassword() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var username = prefs.getString('username');
-    var pass =  prefs.getString('password');
+    var pass = prefs.getString('password');
 
-    if(_username.compareTo(username.toString()) != 0){
+    if (_username.compareTo(username.toString()) != 0) {
       _loginErrorDialog();
-    }
-    else if(_password.compareTo(pass.toString())!= 0){
+    } else if (_password.compareTo(pass.toString()) != 0) {
       _loginErrorDialog();
-    } else{
+    } else {
       redirectToHome();
     }
   }

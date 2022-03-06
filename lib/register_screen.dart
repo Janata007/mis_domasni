@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../constants.dart';
 import 'login_page.dart';
 
-
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
 
@@ -19,7 +18,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool _passwordVisible = false;
   final TextEditingController _usernameTextController = TextEditingController();
   final TextEditingController _passwordTextController = TextEditingController();
-  final TextEditingController _passwordTextController2 = TextEditingController();
+  final TextEditingController _passwordTextController2 =
+      TextEditingController();
 
   final pref = getSharedPreferences();
 
@@ -79,14 +79,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Column(children: <Widget>[
-          Text("Return to login ->", style: TextStyle(fontSize: 17, color: Colors.amberAccent),)
-        ],),
+        title: Column(
+          children: <Widget>[
+            Text(
+              "Return to login ->",
+              style: TextStyle(fontSize: 17, color: Colors.amberAccent),
+            )
+          ],
+        ),
         backgroundColor: Colors.amber,
         actions: [
-          IconButton(onPressed: (){
-            redirectToLogin();
-          }, icon: Icon(Icons.account_circle_rounded))
+          IconButton(
+              onPressed: () {
+                redirectToLogin();
+              },
+              icon: Icon(Icons.account_circle_rounded))
         ],
       ),
       body: Center(
@@ -98,9 +105,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
           Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[Icon(Icons.admin_panel_settings_rounded)]),
-          Row(mainAxisAlignment: MainAxisAlignment.center ,
-          children: [Text("REGISTER",
-            style: TextStyle(fontSize: 20, color: Colors.amber, fontWeight: FontWeight.bold),)],),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "REGISTER",
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.amber,
+                    fontWeight: FontWeight.bold),
+              )
+            ],
+          ),
           const SizedBox(
             height: 48.0,
           ),
@@ -116,16 +132,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-
   void register() {
     _username = _usernameTextController.text;
     _password = _passwordTextController.text;
     _password2 = _passwordTextController2.text;
 
-    if(_password.compareTo(_password2)!=0|| _username=="" || _password=="" || _password2=="") {
+    if (_password.compareTo(_password2) != 0 ||
+        _username == "" ||
+        _password == "" ||
+        _password2 == "") {
       _registerErrorDialog();
-    }
-    else {
+    } else {
       _rememberUsernameAndPassword();
       redirectToLogin();
     }

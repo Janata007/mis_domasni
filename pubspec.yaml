@@ -40,6 +40,8 @@ dependencies:
   shared_preferences: ^2.0.11
   flutter_local_notifications: ^4.0.0+1
   timezone: ^0.6.1
+  flutter_bloc: ^8.0.1
+  geolocator: ^5.1.5
 
 dev_dependencies:
   flutter_test:
