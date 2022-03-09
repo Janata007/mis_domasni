@@ -5,6 +5,8 @@
    <application
         android:label="lab3"
         android:icon="@mipmap/ic_launcher">
+       <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyD_pHCRL-0-sPs_Bu5kvBVAZvVd5xED9Qs"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

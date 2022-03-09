@@ -80,7 +80,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Column(
-          children: <Widget>[
+          children: const <Widget>[
             Text(
               "Return to login ->",
               style: TextStyle(fontSize: 17, color: Colors.amberAccent),
@@ -107,7 +107,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               children: <Widget>[Icon(Icons.admin_panel_settings_rounded)]),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: const [
               Text(
                 "REGISTER",
                 style: TextStyle(
@@ -174,7 +174,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           actions: <Widget>[
             TextButton(
-              child: Text(
+              child: const Text(
                 'Ok',
                 style: TextStyle(color: Colors.amberAccent),
               ),

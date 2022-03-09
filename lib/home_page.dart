@@ -7,6 +7,7 @@ import 'package:lab3/show_location.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'add_termin.dart';
+import 'google_maps.dart';
 import 'notification_api.dart';
 
 class HomePage extends StatefulWidget {
@@ -121,10 +122,18 @@ class _HomePageState extends State<HomePage> {
                     onPressed: () {
                       Navigator.push(
                         context,
+                        MaterialPageRoute(builder: (context) => MyGoogleMaps()),
+                      );
+                    },
+                    child: Text("Go to location page")),
+                TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
                         MaterialPageRoute(builder: (context) => LocationApp()),
                       );
                     },
-                    child: Text("Go to location page"))
+                    child: Text("Get your location"))
               ],
             )));
   }

@@ -24,7 +24,7 @@ class _LocationAppState extends State<LocationApp> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             Icons.location_on,
             size: 46.0,
             color: Colors.amberAccent,
