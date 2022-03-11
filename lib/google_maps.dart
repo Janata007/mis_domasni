@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import 'locations_service.dart';
+
 class MyGoogleMaps extends StatefulWidget {
   const MyGoogleMaps({Key? key}) : super(key: key);
 
@@ -14,29 +16,54 @@ class MyGoogleMaps extends StatefulWidget {
 
 class _MyGoogleMapsState extends State<MyGoogleMaps> {
   Completer<GoogleMapController> _controller = Completer();
+  TextEditingController _searchController = TextEditingController();
   var locationLatitude = "41.99734";
   var locationLongitude = "21.4279956";
 
   static final CameraPosition _kFinki = CameraPosition(
     target: LatLng(42.004142, 21.409902),
+    zoom: 16,
+  );
+  static final CameraPosition _kSkopje = CameraPosition(
+    target: LatLng(41.99734, 21.4279956),
     zoom: 15,
   );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
-        initialCameraPosition: _kFinki,
-        onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
-        },
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: _goToYourLocation,
-        label: Text('Your location!'),
-        icon: Icon(Icons.directions_boat),
-      ),
-    );
+        body: Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            FlatButton(
+              child: Text('Локација за испити'),
+              color: Colors.amber,
+              onPressed: _goToFinki,
+            ),
+            IconButton(
+                onPressed: () {
+                  LocationService().getPlaceId(_searchController.text);
+                },
+                icon: Icon(Icons.search))
+          ],
+        ),
+        Expanded(
+            child: GoogleMap(
+          initialCameraPosition: _kSkopje,
+          markers: {_kFinkiMarker, _kParkMarker},
+          onMapCreated: (GoogleMapController controller) {
+            _controller.complete(controller);
+          },
+        )),
+        FlatButton(
+          onPressed: _goToYourLocation,
+          color: Colors.amber,
+          child: Text("Ваша локација"),
+        ),
+      ],
+    ));
   }
 
   void getCurrentLocation() async {
@@ -57,6 +84,11 @@ class _MyGoogleMapsState extends State<MyGoogleMaps> {
         .animateCamera(CameraUpdate.newCameraPosition(getCameraPosition()));
   }
 
+  Future<void> _goToFinki() async {
+    final GoogleMapController controller = await _controller.future;
+    controller.animateCamera(CameraUpdate.newCameraPosition(_kFinki));
+  }
+
   CameraPosition getCameraPosition() {
     return CameraPosition(
         bearing: 192.8334901395799,
@@ -66,3 +98,16 @@ class _MyGoogleMapsState extends State<MyGoogleMaps> {
         zoom: 19.151926040649414);
   }
 }
+
+final Marker _kFinkiMarker = Marker(
+    markerId: MarkerId('_kFinki'),
+    infoWindow: const InfoWindow(
+        title: "Факултет за информатички науки и компјутерско инженерство"),
+    icon: BitmapDescriptor.defaultMarker,
+    position: LatLng(42.004142, 21.409902));
+
+final Marker _kParkMarker = Marker(
+    markerId: MarkerId('_kPark'),
+    infoWindow: const InfoWindow(title: "Градски парк"),
+    icon: BitmapDescriptor.defaultMarker,
+    position: LatLng(42.004967, 21.421191));
