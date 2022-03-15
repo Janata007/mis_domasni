@@ -20,14 +20,16 @@ class _MyGoogleMapsState extends State<MyGoogleMaps> {
   var locationLatitude = "41.99734";
   var locationLongitude = "21.4279956";
 
-  static final CameraPosition _kFinki = CameraPosition(
+  static final CameraPosition _Finki = CameraPosition(
     target: LatLng(42.004142, 21.409902),
     zoom: 16,
   );
-  static final CameraPosition _kSkopje = CameraPosition(
+  static final CameraPosition _Skopje = CameraPosition(
     target: LatLng(41.99734, 21.4279956),
     zoom: 15,
   );
+
+  late Polyline _myPolyline;
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +53,9 @@ class _MyGoogleMapsState extends State<MyGoogleMaps> {
         ),
         Expanded(
             child: GoogleMap(
-          initialCameraPosition: _kSkopje,
-          markers: {_kFinkiMarker, _kParkMarker},
+          polylines: {_myPolyline},
+          initialCameraPosition: _Skopje,
+          markers: {_FinkiMarker, _kParkMarker},
           onMapCreated: (GoogleMapController controller) {
             _controller.complete(controller);
           },
@@ -61,6 +64,11 @@ class _MyGoogleMapsState extends State<MyGoogleMaps> {
           onPressed: _goToYourLocation,
           color: Colors.amber,
           child: Text("Ваша локација"),
+        ),
+        FlatButton(
+          onPressed: getPolyline,
+          color: Colors.amber,
+          child: Text("Насоки"),
         ),
       ],
     ));
@@ -86,7 +94,7 @@ class _MyGoogleMapsState extends State<MyGoogleMaps> {
 
   Future<void> _goToFinki() async {
     final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(_kFinki));
+    controller.animateCamera(CameraUpdate.newCameraPosition(_Finki));
   }
 
   CameraPosition getCameraPosition() {
@@ -97,10 +105,20 @@ class _MyGoogleMapsState extends State<MyGoogleMaps> {
         tilt: 59.440717697143555,
         zoom: 19.151926040649414);
   }
+
+  void getPolyline() {
+    _myPolyline = Polyline(
+      polylineId: PolylineId('_polyLine'),
+      points: [
+        LatLng(double.parse(locationLatitude), double.parse(locationLongitude)),
+        LatLng(42.004142, 21.409902)
+      ],
+    );
+  }
 }
 
-final Marker _kFinkiMarker = Marker(
-    markerId: MarkerId('_kFinki'),
+final Marker _FinkiMarker = Marker(
+    markerId: MarkerId('_Finki'),
     infoWindow: const InfoWindow(
         title: "Факултет за информатички науки и компјутерско инженерство"),
     icon: BitmapDescriptor.defaultMarker,

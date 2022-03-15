@@ -11,7 +11,7 @@ var placeId = json['candidates'][0]['place_id'] as String;
 print("PLACE ID:" + placeId);
 return placeId;
   }
-  Future<void> getDirections(String origin, String destination) async{
+  Future<void> getDirections(String long1, String lat1, String long2, String lat2) async{
 
   }
 }
